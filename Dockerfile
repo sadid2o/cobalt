@@ -19,6 +19,7 @@ WORKDIR /app
 
 COPY --from=build --chown=node:node /prod/api /app
 # COPY --from=build --chown=node:node /app/.git /app/.git
+RUN mkdir -p /app/.git/refs/heads && echo "ref: refs/heads/main" > /app/.git/HEAD && chown -R node:node /app/.git
 
 USER node
 
