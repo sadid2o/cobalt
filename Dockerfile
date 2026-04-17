@@ -19,8 +19,7 @@ WORKDIR /app
 
 COPY --from=build --chown=node:node /prod/api /app
 # COPY --from=build --chown=node:node /app/.git /app/.git
-RUN mkdir -p /app/.git/refs/heads && echo "ref: refs/heads/main" > /app/.git/HEAD && chown -R node:node /app/.git
-
+RUN mkdir -p /app/.git/refs/heads /app/.git/logs && echo "ref: refs/heads/main" > /app/.git/HEAD && echo "0000000000000000000000000000000000000000 1234567890abcdef1234567890abcdef12345678 Render <render@render.com> 1712345678 +0000 commit: dummy" > /app/.git/logs/HEAD && chown -R node:node /app/.git
 USER node
 
 EXPOSE 9000
